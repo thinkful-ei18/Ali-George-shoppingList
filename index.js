@@ -3,22 +3,25 @@
 const STORE = {
   item: [{
     name: 'apples',
+    toggle: false,
     checked: false
   },
-    {
-      name: 'oranges',
-      checked: false
-    },
-    {
-      name: 'milk',
-      checked: true
-    },
-    {
-      name: 'bread',
-      checked: false
-    }],
+  {
+    name: 'oranges',
     toggle: false,
-}
+    checked: false
+  },
+  {
+    name: 'milk',
+    toggle: false,
+    checked: true
+  },
+  {
+    name: 'bread',
+    toggle: false,
+    checked: false
+  }],
+};
 /*
     *Listen to click on item title span
       *Transforms to input
@@ -38,11 +41,14 @@ const STORE = {
           *Create filtered store array, pass new array
           *renderShoppingList()
 */
+//Component function to 
 
 // Component function for toggleCheckedItemElement(): cycle through STORE, change value of toggle
-function cycleStore() {
-  !(STORE.toggle) ? STORE.toggle = true: STORE.toggle = false;
-  console.log(STORE.toggle);
+function cycleStore(index) {
+  const num = parseInt(index, 10)
+  !(STORE.item[num].toggle) ? STORE.item[num].toggle = true : STORE.item[num].toggle = false;
+  // console.log(STORE.toggle);
+ // console.log(STORE.item[index].toggle);
 }
 
 // This renders DOM and takes at least one other function!!!
@@ -51,15 +57,16 @@ function toggleCheckedItemElements() {
   $('.js-toggle').click(event => {
     event.preventDefault();
     cycleStore();
+    renderShoppingList();
   });
-  renderShoppingList();
 }
 
 
 
 function generateItemElement(item, itemIndex, template) {
+  console.log(parseInt(itemIndex, 10));
   return `
-    <li class="js-item-index-element ${STORE.toggle ? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
+    <li class="js-item-index-element ${cycleStore(itemIndex)? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
