@@ -19,6 +19,7 @@ const STORE = {
     checked: false
   }],
   toggle: false,
+  search: null,
 };
 /*
     *Listen to click on item title span
@@ -38,8 +39,9 @@ const STORE = {
 function searchVal() {
   $('.js-filter').click(event => {
     event.preventDefault();
-    let str = $('.js-filter-input').val();
-    console.log(str);
+    STORE.search = $('.js-filter-input').val();
+    console.log(STORE.search);
+    // function compareVal()
   });
 }
 
@@ -51,7 +53,6 @@ function searchElements() {
 //Cycle is going to toggle, toggle between true and false
 function cycleStore() {
   !STORE.toggle ? STORE.toggle = true : STORE.toggle = false;
-  console.log(STORE.toggle);
 }
 
 
@@ -68,7 +69,7 @@ function toggleCheckedItemElements() {
 function generateItemElement(item, itemIndex, template) {
   // console.log(parseInt(itemIndex, 10));
   return `
-    <li class="js-item-index-element ${(STORE.item[parseInt(itemIndex, 10)].checked) && STORE.toggle ? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
+    <li class="js-item-index-element ${(STORE.item[parseInt(itemIndex, 10)].checked) && STORE.toggle ? 'hide-filter' : ''}" data-item-index="${itemIndex}">
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
@@ -86,7 +87,7 @@ function generateShoppingItemsString(shoppingList) {
   console.log('Generating shopping list element');
 
   const items = shoppingList.map((item, index) => generateItemElement(item, index));
-
+  // if e
   return items.join('');
 }
 
