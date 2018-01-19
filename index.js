@@ -56,10 +56,14 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
+<<<<<<< HEAD
   STORE.push({
     name: itemName,
     checked: false
   });
+=======
+  STORE.push({ name: itemName, checked: false });
+>>>>>>> 7f3e3fdf50042de9d2f591b4d82923019c3eb7a4
 }
 
 function handleNewItemSubmit() {
@@ -71,12 +75,33 @@ function handleNewItemSubmit() {
     addItemToShoppingList(newItemName);
     renderShoppingList();
   });
+<<<<<<< HEAD
+=======
 }
 
+function toggleCheckedForListItem(itemIndex) {
+  console.log("Toggling checked property for item at index " + itemIndex);
+  STORE[itemIndex].checked = !STORE[itemIndex].checked;
+>>>>>>> 7f3e3fdf50042de9d2f591b4d82923019c3eb7a4
+}
+
+
+function getItemIndexFromElement(item) {
+  const itemIndexString = $(item)
+    .closest('.js-item-index-element')
+    .attr('data-item-index');
+  return parseInt(itemIndexString, 10);
+}
 
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
     console.log('`handleItemCheckClicked` ran');
+<<<<<<< HEAD
+=======
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    toggleCheckedForListItem(itemIndex);
+    renderShoppingList();
+>>>>>>> 7f3e3fdf50042de9d2f591b4d82923019c3eb7a4
   });
 }
 
