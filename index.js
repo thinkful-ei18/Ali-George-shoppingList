@@ -45,8 +45,9 @@ const STORE = {
 
 // Component function for toggleCheckedItemElement(): cycle through STORE, change value of toggle
 function cycleStore(index) {
-  const num = parseInt(index, 10)
-  !(STORE.item[num].toggle) ? STORE.item[num].toggle = true : STORE.item[num].toggle = false;
+  const num = parseInt(index, 10);
+  console.log(index);
+  !STORE.item[num].toggle ? STORE.item[num].toggle = true : STORE.item[num].toggle = false;
   // console.log(STORE.toggle);
  // console.log(STORE.item[index].toggle);
 }
@@ -66,7 +67,7 @@ function toggleCheckedItemElements() {
 function generateItemElement(item, itemIndex, template) {
   console.log(parseInt(itemIndex, 10));
   return `
-    <li class="js-item-index-element ${cycleStore(itemIndex)? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
+    <li class="js-item-index-element ${ cycleStore(itemIndex) ? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
