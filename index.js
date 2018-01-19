@@ -3,7 +3,6 @@
 const STORE = {
   item: [{
     name: 'apples',
-    toggle: false,
     checked: false
   },
   {
@@ -34,12 +33,24 @@ const STORE = {
           *renderShoppingList()
 */
 
+//compareValue() will return an array with the filtered items, given input
+
+function compareValue() {
+
+}
+
+
 //Component function that filters items displayed via input value given 
 function searchVal() {
   $('.js-filter').click(event => {
     event.preventDefault();
     let str = $('.js-filter-input').val();
     console.log(str);
+
+    //  $('.js-shopping-list-entry').val('');
+    //  compareValue(;
+    //  renderShoppingList();
+
   });
 }
 
@@ -86,7 +97,6 @@ function generateShoppingItemsString(shoppingList) {
   console.log('Generating shopping list element');
 
   const items = shoppingList.map((item, index) => generateItemElement(item, index));
-
   return items.join('');
 }
 
