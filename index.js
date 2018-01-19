@@ -38,19 +38,28 @@ const STORE = {
           *Create filtered store array, pass new array
           *renderShoppingList()
 */
+
+// Component function for toggleCheckedItemElement(): cycle through STORE, change value of toggle
+function cycleStore() {
+  !(STORE.toggle) ? STORE.toggle = true: STORE.toggle = false;
+  console.log(STORE.toggle);
+}
+
 // This renders DOM and takes at least one other function!!!
 function toggleCheckedItemElements() {
   console.log('toggle check');
   $('.js-toggle').click(event => {
     event.preventDefault();
+    cycleStore();
   });
   renderShoppingList();
 }
-// Second function
+
+
 
 function generateItemElement(item, itemIndex, template) {
   return `
-    <li class="js-item-index-element" data-item-index="${itemIndex}">
+    <li class="js-item-index-element ${STORE.toggle ? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
