@@ -18,7 +18,7 @@ const STORE = {
     name: 'bread',
     checked: false
   }],
-  toggle: true,
+  toggle: false,
 };
 /*
     *Listen to click on item title span
@@ -27,36 +27,48 @@ const STORE = {
         *Button to cancel function, 'cancel' button
         *renderShoppingList()
 
-   Toggle to show
-      *Hide elements that have been checked
-        *Button to toggle hide filter on checked items
-        *Check checked values and hide properties that are checked true
-        *renderShoppingList()
-
     Search term filter
       *Listen to filter button
         *Take filter input value and filter STORE to only show properties with a matching character set
           *Create filtered store array, pass new array
           *renderShoppingList()
 */
-//Component function to 
+
+//Component function that filters items displayed via input value given 
+function searchVal() {
+  $('.js-filter').click(event => {
+    event.preventDefault();
+    let str = $('.js-filter-input').val();
+    console.log(str);
+  });
+}
+
+function searchElements() {
+  //Component function that grabs value
+  console.log(searchVal());
+}
+
+//Cycle is going to toggle, toggle between true and false
+function cycleStore() {
+  !STORE.toggle ? STORE.toggle = true : STORE.toggle = false;
+  console.log(STORE.toggle);
+}
 
 
 // This renders DOM and takes at least one other function!!!
 function toggleCheckedItemElements() {
   $('.js-toggle').click(event => {
     event.preventDefault();
-    console.log('toggle check');
+    cycleStore()
     renderShoppingList();
   });
 }
 
 
-
 function generateItemElement(item, itemIndex, template) {
   // console.log(parseInt(itemIndex, 10));
   return `
-    <li class="js-item-index-element ${(!STORE.toggle) ? 'hidden-filter' : ' '}" data-item-index="${itemIndex}">
+    <li class="js-item-index-element ${(STORE.item[parseInt(itemIndex, 10)].checked) && STORE.toggle ? 'hide-filter' : ' '}" data-item-index="${itemIndex}">
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
@@ -154,6 +166,7 @@ function handleShoppingList() {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   toggleCheckedItemElements();
+  searchElements();
 }
 
 // when the page loads, call `handleShoppingList`
