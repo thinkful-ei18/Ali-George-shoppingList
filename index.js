@@ -3,6 +3,7 @@
 const STORE = {
   item: [{
     name: 'apples',
+    toggle: false,
     checked: false
   },
   {
